@@ -10,8 +10,12 @@ public class AutoMapperProfiles : Profile
         CreateMap<AppUser, MemberDto>()
             .ForMember(d => d.Age, o => o.MapFrom(s => s.DateOfBirth.CalculateAge()))
             .ForMember(d => d.PhotoUrl, o => 
-                o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain)!.Url));
+                o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain)!.Url));   
         CreateMap<Photo, PhotoDto>();
+        CreateMap<Questionnaire, QuestionnaireDto>();
+        CreateMap<QuestionSection, QuestionSectionDto>();
+        CreateMap<Question, QuestionDto>();
+        CreateMap<AnswerOption, AnswerOptionDto>();
         CreateMap<MemberUpdateDto, AppUser>();
     }
 }

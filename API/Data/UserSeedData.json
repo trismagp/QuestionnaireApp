@@ -16,6 +16,16 @@
                 "Url": "https://randomuser.me/api/portraits/women/54.jpg",
                 "IsMain": true
             }
+        ],
+        "Questionnaires": [
+            {
+                "Title": "Questionnaire L1",
+                "Description": "for qL1"
+            },
+            {
+                "Title": "Questionnaire L2",
+                "Description": "for qL2"
+            }
         ]
     },
     {
@@ -191,8 +201,12 @@
         "Questionnaires": [
             {
                 "Title": "Questionnaire 1",
-                "Description": "for asjflkkj"
-                }
+                "Description": "for q1"
+            },
+            {
+                "Title": "Questionnaire 2",
+                "Description": "for q2"
+            }
         ]
     }
 ]
