@@ -1,4 +1,5 @@
 import { Photo } from "./photo"
+import { Questionnaire } from "./questionnaire"
 
 export interface Member {
     id: number
@@ -15,4 +16,5 @@ export interface Member {
     city: string
     country: string
     photos: Photo[]
+    questionnaires: Questionnaire[]
   }

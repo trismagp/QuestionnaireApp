@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../_models/member';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
+import { Questionnaire } from '../../_models/questionnaire';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class MemberDetailComponent {
   
   member?: Member;
   images: GalleryItem[] = [];
+  questionnaires: Questionnaire[]=[];
 
 
   ngOnInit(): void {
@@ -33,6 +35,9 @@ export class MemberDetailComponent {
         this.member = member;
         member.photos.map(p => {
           this.images.push(new ImageItem({src: p.url, thumb: p.url}))
+        });
+        member.questionnaires.map(p=>{
+          this.questionnaires.push(p)
         })
       }
     })
