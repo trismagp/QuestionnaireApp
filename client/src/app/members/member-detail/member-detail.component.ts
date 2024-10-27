@@ -5,12 +5,13 @@ import { Member } from '../../_models/member';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { Questionnaire } from '../../_models/questionnaire';
+import { QuestionnaireListComponent } from "../../questionnaires/questionnaire-list/questionnaire-list.component";
 
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [TabsModule,GalleryModule],
+  imports: [TabsModule, GalleryModule, QuestionnaireListComponent],
   templateUrl: './member-detail.component.html',
   styleUrl: './member-detail.component.css'
 })

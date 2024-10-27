@@ -1,0 +1,17 @@
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (questionnaire of questionnaires(); track questionnaire.id){
+                <tr>
+                    <td>{{questionnaire.title}}</td>
+                    <td>{{questionnaire.description}}</td>
+                </tr>
+            } 
+        </tbody>
+    </table>

@@ -60,22 +60,7 @@
                     <p>Messages will go here</p>
                 </tab>
                 <tab heading="Questionnaires">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    @for (questionnaire of member.questionnaires; track questionnaire.id){
-                        <tr>
-                            <td>{{questionnaire.title}}</td>
-                            <td>{{questionnaire.description}}</td>
-                        </tr>
-                    } 
-                </tbody>
-            </table>
+                    <app-questionnaire-list [questionnaires]="questionnaires"></app-questionnaire-list>
                 </tab>
             </tabset>
         </div>
