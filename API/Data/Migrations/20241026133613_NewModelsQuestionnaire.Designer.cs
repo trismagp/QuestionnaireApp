@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241026133613_NewModelsQuestionnaire")]
+    partial class NewModelsQuestionnaire
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
@@ -195,36 +198,6 @@ namespace API.Data.Migrations
                     b.ToTable("Questionnaire");
                 });
 
-            modelBuilder.Entity("AppUserQuestionnaire", b =>
-                {
-                    b.Property<int>("AdministeredQuestionnairesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AdminsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AdministeredQuestionnairesId", "AdminsId");
-
-                    b.HasIndex("AdminsId");
-
-                    b.ToTable("QuestionnaireAdmins", (string)null);
-                });
-
-            modelBuilder.Entity("AppUserQuestionnaire1", b =>
-                {
-                    b.Property<int>("ParticipantListId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ParticipatedQuestionnairesId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ParticipantListId", "ParticipatedQuestionnairesId");
-
-                    b.HasIndex("ParticipatedQuestionnairesId");
-
-                    b.ToTable("QuestionnaireParticipants", (string)null);
-                });
-
             modelBuilder.Entity("API.Entities.AnswerOption", b =>
                 {
                     b.HasOne("API.Entities.Question", null)
@@ -266,36 +239,6 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("AppUserQuestionnaire", b =>
-                {
-                    b.HasOne("API.Entities.Questionnaire", null)
-                        .WithMany()
-                        .HasForeignKey("AdministeredQuestionnairesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("AdminsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AppUserQuestionnaire1", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Questionnaire", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipatedQuestionnairesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>

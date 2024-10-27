@@ -9,5 +9,5 @@ public class Question
     public required string Text { get; set; }
     public QuestionType Type { get; set; }
     public List<AnswerOption>? AnswerOptions { get; set; } = new();
-    public bool IsRequired { get; set; }
+    public bool IsRequired { get; set; } = true;
 }

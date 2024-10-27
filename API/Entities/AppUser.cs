@@ -23,6 +23,10 @@ public class AppUser
 
     public List<Questionnaire> Questionnaires { get; set; } = [];
 
+     public List<Questionnaire> AdministeredQuestionnaires { get; set; } = new();
+
+     public List<Questionnaire> ParticipatedQuestionnaires { get; set; } = new();
+
 
     //  public int GetAge() 
     // {
