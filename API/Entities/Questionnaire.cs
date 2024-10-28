@@ -1,7 +1,11 @@
+
+using System.ComponentModel.DataAnnotations.Schema;
+
 using API.Extensions;
 
 namespace API.Entities;
 
+[Table("Questionnaires")]
 public class Questionnaire
 {
     public int Id { get; set; }
