@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using API.Interfaces;
 using System.Security.Claims;
+using API.Extensions;
+using API.Entities;
 
 namespace API.Controllers;
 
@@ -30,21 +32,35 @@ public class UsersController(IUserRepository userRepository, IMapper mapper) : B
     [HttpPut]
     public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
     {
-
-        var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        if(username == null ) return BadRequest("no username found in token");
-        var user = await userRepository.GetUserByUsernameAsync(username);
-
-        // var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-
-        // if (user == null) return BadRequest("Could not find user");
+        var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
 
         mapper.Map(memberUpdateDto, user);
-        
-        // if (await unitOfWork.Complete()) return NoContent();
 
         if (await userRepository.SaveAllAsync()) return NoContent();
         return BadRequest("Failed to update the user");
     }
+
+
+    [HttpPost("add-questionnaire")]
+    public async Task<ActionResult<QuestionnaireDto>> AddQuestionnaire(QuestionnaireDto questionnaireDto)
+    {
+        var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+        if (user == null) return BadRequest("Cannot update user");
+
+        var questionnaire = new Questionnaire
+        {
+            Title = questionnaireDto.Title,
+            Description = questionnaireDto.Description
+        };
+
+        user.Questionnaires.Add(questionnaire);
+
+        if (await userRepository.SaveAllAsync()) 
+            return CreatedAtAction(nameof(GetUser), 
+            new {username = user.UserName}, mapper.Map<QuestionnaireDto>(questionnaire));
+
+        return BadRequest("Problem adding questionnaire");
+    }
+
 }
